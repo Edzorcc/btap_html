@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Magazine Subscription Form</title>
+  <style>
+    h1{
+        color: rgb(1, 196, 33);
+    }
+    body{
+        background-color: rgb(214, 211, 211);
+    }
+    fieldset {
+      background-color: #eeeeee;
+    }
+    
+    legend {
+      background-color: gray;
+      color: white;
+      padding: 5px 10px;
+    }
+    
+    input {
+      margin: 5px;
+    }
+    </style>
+</head>
+<body>
+  <form action="edzorc.com">
+    <h1>
+        <center><strong>Subscription Form</strong></center>
+    </h1>
+    <fieldset>
+      <legend>Personal Information</legend>
+      <label for="lname">Last Name:</label>
+      <input type="text" id="lname" name="lname">
+      <label for="fname">First Name:</label>
+      <input type="text" id="fname" name="fname">
+      <br>
+      <label for="male">Male</label>
+      <input type="radio" id="male" name="gender" value="male">
+      <label for="female">Female</label>
+      <input type="radio" id="female" name="gender" value="female">
+      <br>
+      <label for="address">Address:</label>
+      <br>
+      <textarea id="address" name="address" rows="10" cols="30">Some one in Hanoi</textarea>
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>Magazines Subscription for</legend>
+      <input type="checkbox" name="ckMagazines" value="Times">Times
+      <input type="checkbox" name="ckMagazines" value="Newsweek">Newsweek
+      <input type="checkbox" name="ckMagazines" value="Sunday">Sunday
+      <input type="checkbox" name="ckMagazines" value="Vogue">Vogue
+      <input type="checkbox" name="ckMagazines" value="People">People
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>Duration</legend>
+      <input type="radio" id="1year" name="dura" value="1 Year">
+      <label for="1year">1 Year</label>
+      <input type="radio" id="3years" name="dura" value="3 Years">
+      <label for="3years">3 Years</label>
+      <input type="radio" id="5years" name="dura" value="5 Years">
+      <label for="5years">5 Years</label>
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>Payment Option</legend>
+      <input type="radio" id="demandDraft" name="Pop" value="Demand Draft">
+      <label for="demandDraft">Demand Draft</label>
+      <input type="radio" id="creditCard" name="Pop" value="Credit Card">
+      <label for="creditCard">Credit Card</label>
+
+    </fieldset>
+    <br>
+    <input type="submit" value="Process">
+    <input type="reset" value="Reset">
+  </form>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('form').addEventListener('submit', function(event) {
+        var fname = document.getElementById('fname').value;
+        var lname = document.getElementById('lname').value;
+        var address = document.getElementById('address').value;
+        var magazines = document.querySelectorAll('input[name="ckMagazines"]:checked');
+        var duration = document.querySelector('input[name="dura"]:checked');
+        var payment = document.querySelector('input[name="Pop"]:checked');
+
+        if (fname === '' || lname === '' || address === '' || magazines.length === 0 || !duration || !payment) {
+          alert('Please fill in all required fields and select at least one magazine, duration, and payment option.');
+          event.preventDefault();
+        } else {
+          var magazineNames = Array.from(magazines).map(function(magazine) {
+            return magazine.value;
+          }).join(', ');
+
+          var durationValue = duration.value;
+          var paymentOption = payment.value;
+
+          var confirmationMessage = 'Do you want to order ' + magazineNames + ' for ' + durationValue + ' to pay with ' + paymentOption + '?';
+          if (confirm(confirmationMessage)) {
+            var gender = document.querySelector('input[name="gender"]:checked').value;
+            var thankYouMessage = 'Thank you very much for your order, we will supply as soon as possible the magazines for you to the address: ' + fname + ' ' + lname + ', ' + address;
+            if (confirm(thankYouMessage)) {
+            } else {
+              document.getElementById('lname').focus();
+              event.preventDefault();
+            }
+          } else {
+            document.getElementById('lname').focus();
+            event.preventDefault();
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+

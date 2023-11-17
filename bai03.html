@@ -1,0 +1,64 @@
+<form action="edzorc.com" id="subscriptionForm">
+    <fieldset>
+      <legend>Personal Information</legend>
+      <label for="lname">Last Name:</label>
+      <input type="text" id="lname" name="lname">
+      <label for="fname">First Name:</label>
+      <input type="text" id="fname" name="fname">
+      <br>
+      <label for="male">Male</label>
+      <input type="checkbox" id="male" name="gender" value="male">
+      <label for="female">Female</label>
+      <input type="checkbox" id="female" name="gender" value="female">
+      <br>
+      <label for="address">Address:</label>
+      <br>
+      <textarea id="address" name="address" rows="10" cols="30"></textarea>
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>Magazines Subscription for</legend>
+      <input type="checkbox" name="ckMagazines" value="Times">Times
+      <input type="checkbox" name="ckMagazines" value="Newsweek">Newsweek
+      <input type="checkbox" name="ckMagazines" value="Sunday">Sunday
+      <input type="checkbox" name="ckMagazines" value="Vogue">Vogue
+      <input type="checkbox" name="ckMagazines" value="People">People
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>Duration</legend>
+      <input type="checkbox" id="1year" name="duration" value="1year">
+      <label for="1year">1 Year</label>
+      <input type="checkbox" id="3years" name="duration" value="3years">
+      <label for="3years">3 Years</label>
+      <input type="checkbox" id="5years" name="duration" value="5years">
+      <label for="5years">5 Years</label>
+    </fieldset>
+    <br>
+    <fieldset>
+      <legend>Payment Option</legend>
+      <label for="demandDraft">Demand Draft</label>
+      <input type="checkbox" id="demandDraft" name="payment" value="demandDraft">
+      <label for="creditCard">Credit Card</label>
+      <input type="checkbox" id="creditCard" name="payment" value="creditCard">
+    </fieldset>
+    <br>
+    <input type="submit" value="Process">
+    <input type="reset" value="Reset">
+  </form>
+  
+  <script>
+  document.getElementById('subscriptionForm').addEventListener('submit', function(event) {
+    var fname = document.getElementById('fname').value;
+    var lname = document.getElementById('lname').value;
+    var address = document.getElementById('address').value;
+    var magazines = document.querySelectorAll('input[name="ckMagazines"]:checked').length;
+    var duration = document.querySelectorAll('input[name="duration"]:checked').length;
+    var payment = document.querySelectorAll('input[name="payment"]:checked').length;
+  
+    if (fname === '' || lname === '' || address === '' || magazines === 0 || duration === 0 || payment === 0) {
+      alert('Please fill in all required fields and select at least one magazine, duration, and payment option.');
+      event.preventDefault();
+    }
+  });
+  </script>
